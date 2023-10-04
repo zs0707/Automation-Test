@@ -1,0 +1,126 @@
+from _ast import Assert
+
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
+
+
+base_url = "https://dev-admin.tsetab.com"
+driver = webdriver.Firefox()
+driver.get(f"{base_url}")
+sleep(4)
+
+## Add User
+user = driver.find_element('id', 'js-loginFormStep1-usernameInput')
+user.send_keys('administrator')
+
+## Add Password
+password = driver.find_element('id', 'js-loginFormStep1-passwordInput')
+password.send_keys('Administrator@IFS')
+
+## Add Capcha
+cap = driver.find_element('id', 'js-loginFormStep1-captchaInput')
+cap.click()
+cap.send_keys('0')
+
+## Login
+enter = driver.find_element('id', 'js-loginFormStep1-submitButton')
+enter.click()
+sleep(2)
+
+## Run Voucher Detail
+driver.get(f"{base_url}/#/accounting-vouchers/accounting-vouchers-detail")
+sleep(2)
+
+## Add Date
+date = driver.find_element('xpath', '//app-voucher-header/div[1]/form[1]/div[1]/div[1]/mat-datepicker-toggle[1]/button[1]/span[1]/*[1]')
+date.click()
+date1 = driver.find_element('xpath', '//tbody/tr[2]/td[5]/button[1]/div[1]')
+date1.click()
+sleep(2)
+
+## Add Subsidury
+sub = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[1]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
+sub.click()
+sub1 = driver.find_element('xpath', "//div[contains(text(),'11001 - بانک های ریالی')]")
+
+sub1.click()
+sleep(2)
+
+## Add Detail Account
+detail = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[2]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
+detail.click()
+sleep(2)
+detail.send_keys('00020018')
+sleep(2)
+detail_1 = driver.find_element('xpath', "//div[text()='00020018 - بانک اقتصاد نوین - 2123456789']")
+detail_1.click()
+sleep(2)
+
+
+## Add Description
+desc = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[3]/f-input-text[1]/div[1]/nz-input-group[1]/input[1]')
+desc.click()
+desc.send_keys('شرح تست')
+sleep(2)
+
+## Add Debit
+deb = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[4]/f-input-currency[1]/div[1]/nz-input-group[1]/input[1]')
+deb.click()
+deb.send_keys('1000000')
+sleep(1)
+
+## Approved Row
+sab = driver.find_element('xpath', '//button[@type="submit"]')
+sab.click()
+sleep(5)
+
+
+## Add Subsidury1
+sub2 = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[1]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
+sub2.click()
+sub3 = driver.find_element('xpath', "//div[contains(text(),'11001 - بانک های ریالی')]")
+
+sub3.click()
+sleep(2)
+
+## Add Detail Account
+detail2 = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[2]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
+detail2.click()
+sleep(2)
+detail2.send_keys('00020018')
+sleep(2)
+detail_3 = driver.find_element('xpath', "//div[text()='00020018 - بانک اقتصاد نوین - 2123456789']")
+detail_3.click()
+sleep(2)
+
+
+## Add Description
+desc1 = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[3]/f-input-text[1]/div[1]/nz-input-group[1]/input[1]')
+desc1.click()
+desc1.send_keys('شرح تست2')
+sleep(2)
+
+## Add Credit
+Credit = driver.find_element('xpath', '(//input[contains(@class,"display-body16 dir-ltr")])[2]')
+Credit.click()
+Credit.send_keys('1000000')
+sleep(1)
+
+## Approved Row
+sab1 = driver.find_element('xpath', '//button[@type="submit"]')
+sab1.click()
+sleep(5)
+
+
+
+
+## Save As Movaghat
+Movaghat = driver.find_element('xpath', '//span[text()=" ذخیره موقت "]')
+Movaghat.click()
+sleep(2)
+
+# ## Assertion
+# # # AssertionError == "دوره مالی مربوطه تعریف نشده است"
+# #
+# Assert.assertEquals("دوره مالی مربوطه تعریف نشده است", 'actualString')
