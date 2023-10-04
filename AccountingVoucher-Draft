@@ -1,16 +1,14 @@
+from _ast import Assert
 
 from selenium import webdriver
-
-driver = webdriver.Firefox()
-
 from time import sleep
 from selenium.webdriver.common.by import By
 
 
 base_url = "https://dev-admin.tsetab.com"
-
+driver = webdriver.Firefox()
 driver.get(f"{base_url}")
-sleep(2)
+sleep(4)
 
 ## Add User
 user = driver.find_element('id', 'js-loginFormStep1-usernameInput')
@@ -44,19 +42,21 @@ sleep(2)
 ## Add Subsidury
 sub = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[1]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
 sub.click()
-sleep(4)
 sub1 = driver.find_element('xpath', "//div[contains(text(),'11001 - بانک های ریالی')]")
+
 sub1.click()
 sleep(2)
 
 ## Add Detail Account
 detail = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[2]/nz-form-control[1]/div[1]/div[1]/nz-select[1]/nz-select-top-control[1]/nz-select-search[1]/input[1]')
 detail.click()
-sleep(4)
-detail1 = driver.find_element('xpath', '//div[contains(text(),"00020004-غیرفعال")]')
 sleep(2)
-detail1.click()
+detail.send_keys('00020018')
 sleep(2)
+detail_1 = driver.find_element('xpath', "//div[text()='00020018 - بانک اقتصاد نوین - 2123456789']")
+detail_1.click()
+sleep(2)
+
 
 ## Add Description
 desc = driver.find_element('xpath', '//body/app-root[1]/div[1]/div[1]/main[1]/app-accounting-vouchers-detail[1]/entity-wrapper[1]/div[1]/div[1]/div[1]/app-voucher-item-form[1]/div[1]/form[1]/div[1]/nz-form-item[3]/f-input-text[1]/div[1]/nz-input-group[1]/input[1]')
@@ -76,7 +76,7 @@ sab.click()
 sleep(5)
 
 ## Save As Pishnevis
-pish = driver.find_element('xpath', '//span[text()="پیش نویس"]')
+pish = driver.find_element('xpath', '//span[text()="پیش نویس "]')
 pish.click()
 sleep(2)
 
